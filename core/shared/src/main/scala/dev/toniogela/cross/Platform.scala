@@ -21,6 +21,17 @@
 
 package dev.toniogela.cross
 
+/**
+ * An object that encloses the `platformAndVersion` string
+ */
 object Platform extends PlatformAndVersionSpecific {
+
+  /**
+    * A string indicating the platform you're on and the scala version
+    * {{{
+    * scala> Platform.platformAndVersion.nonEmpty
+    * res0: Boolean = true
+    * }}}
+    */
   val platformAndVersion: String = version
 }
