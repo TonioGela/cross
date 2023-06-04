@@ -21,6 +21,10 @@
 
 package dev.toniogela.cross
 
-object Platform extends PlatformAndVersionSpecific {
-  val platformAndVersion: String = version
+import org.scalatest.funsuite.AnyFunSuite
+
+class PlatformSpec extends AnyFunSuite {
+  test("Testing platform " + Platform.platformAndVersion) {
+    assert(Platform.platformAndVersion.nonEmpty)
+  }
 }

@@ -13,14 +13,19 @@ ThisBuild / scalaVersion       := "3.3.0"
 
 ThisBuild / githubWorkflowJavaVersions := List(JavaSpec.temurin("8"), JavaSpec.temurin("17"))
 
-lazy val root = tlCrossRootProject.aggregate(core, tests)
+lazy val root = tlCrossRootProject.aggregate(core, tests, unidocs)
 
 lazy val core = crossProject(JVMPlatform, JSPlatform, NativePlatform)
   .crossType(CrossType.Full)
   .in(file("core"))
+  .settings(name := "cross")
+
+lazy val unidocs = project
+  .in(file("unidocs"))
+  .enablePlugins(TypelevelUnidocPlugin) // also enables the ScalaUnidocPlugin
   .settings(
-    name                                    := "cross-core",
-    libraryDependencies += "org.typelevel" %%% "cats-core" % "2.9.0"
+    name                                       := "cross",
+    ScalaUnidoc / unidoc / unidocProjectFilter := inProjects(core.jvm)
   )
 
 lazy val tests = crossProject(JVMPlatform, JSPlatform, NativePlatform)
@@ -29,6 +34,6 @@ lazy val tests = crossProject(JVMPlatform, JSPlatform, NativePlatform)
   .enablePlugins(NoPublishPlugin)
   .dependsOn(core)
   .settings(
-    name                                    := "cross-core-tests",
-    libraryDependencies += "org.scalameta" %%% "munit" % "1.0.0-M7" % Test
+    name                                    := "cross-tests",
+    libraryDependencies += "org.scalatest" %%% "scalatest" % "3.2.16" % Test
   )
