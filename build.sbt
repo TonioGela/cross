@@ -24,7 +24,7 @@ lazy val unidocs = project
   .in(file("unidocs"))
   .enablePlugins(TypelevelUnidocPlugin)
   .settings(
-    name                                       := "cross",
+    name                                       := "cross-unidocs",
     ScalaUnidoc / unidoc / unidocProjectFilter := inProjects(core.jvm)
   )
 
