@@ -22,7 +22,7 @@ lazy val core = crossProject(JVMPlatform, JSPlatform, NativePlatform)
 
 lazy val unidocs = project
   .in(file("unidocs"))
-  .enablePlugins(TypelevelUnidocPlugin) // also enables the ScalaUnidocPlugin
+  .enablePlugins(TypelevelUnidocPlugin)
   .settings(
     name                                       := "cross",
     ScalaUnidoc / unidoc / unidocProjectFilter := inProjects(core.jvm)
