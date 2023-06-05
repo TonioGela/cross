@@ -13,6 +13,10 @@ ThisBuild / scalaVersion       := "3.3.0"
 
 ThisBuild / githubWorkflowJavaVersions := List(JavaSpec.temurin("8"), JavaSpec.temurin("17"))
 
+ThisBuild / mergifyStewardConfig ~= {
+  _.map(_.copy(mergeMinors = true, author = "toniogela-s-scala-steward[bot]"))
+}
+
 lazy val root = tlCrossRootProject.aggregate(core, tests, unidocs)
 
 lazy val core = crossProject(JVMPlatform, JSPlatform, NativePlatform)
