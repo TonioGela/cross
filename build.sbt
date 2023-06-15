@@ -1,5 +1,6 @@
+import laika.ast.LengthUnit.px
 import laika.helium.config._
-import laika.rewrite.nav.{ChoiceConfig, SelectionConfig, Selections}
+import laika.rewrite.nav._
 
 ThisBuild / organization     := "dev.toniogela"
 ThisBuild / organizationName := "TonioGela"
@@ -56,33 +57,29 @@ lazy val docs = project
   .dependsOn(core.jvm)
   .settings(
     scalaVersion := "3.3.0",
-    tlSiteHelium ~= {
-      _.site
-        .topNavigationBar(homeLink =
-          TextLink.external(
-            "https://cross.toniogela.dev",
-            "Cross"
-          )
+    tlSiteHelium ~= { helium =>
+      val favicon            = Favicon.external("https://toniogela.dev/favicon.ico", "32x32", "image/vnd.microsoft.icon")
+      val homeLink           = TextLink.external("https://cross.toniogela.dev", "❌ Cross Library")
+      val blogLink           = TextLink.external("https://toniogela.dev/cross-library", "A blog article about this lib")
+      val sbtTL              = TextLink.external("https://typelevel.org/sbt-typelevel", "sbt-typelevel")
+      val chatLink: IconLink = IconLink.external("https://discord.com/users/372358874243661825", HeliumIcon.chat)
+      val twitter: IconLink  = IconLink.external("https://twitter.com/toniogela", HeliumIcon.twitter)
+
+      helium.site.darkMode.disabled.site
+        .favIcons(favicon)
+        .site
+        .layout(topBarHeight = px(50))
+        .site
+        .topNavigationBar(
+          homeLink = homeLink,
+          navLinks = twitter :: chatLink :: Nil
         )
         .site
-        .mainNavigation(
-          appendLinks = List(
-            ThemeNavigationSection(
-              "Related Links",
-              TextLink.external("https://toniogela.dev/", "[SOON] A blog article about this lib")
-            )
-          )
-        )
+        .mainNavigation(appendLinks = ThemeNavigationSection("Related Links", blogLink, sbtTL) :: Nil)
     },
     laikaConfig ~= {
       _.withConfigValue(
-        Selections(
-          SelectionConfig(
-            "build-tool",
-            ChoiceConfig("scala-cli", "Scala CLI"),
-            ChoiceConfig("sbt", "sbt")
-          )
-        )
+        Selections(SelectionConfig("build-tool", ChoiceConfig("scala-cli", "Scala CLI"), ChoiceConfig("sbt", "sbt")))
       )
     }
   )

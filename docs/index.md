@@ -1,9 +1,12 @@
 # Cross Library
 
-A zero-purpose library published to demonstrate the ease of the process.
+A **zero-purpose** library published to demonstrate the **ease of the process**.
 
-It is published for Scala 2.13 and 3.2+ and also fully supports Scala.js 1.13+ and Scala Native 0.4.
+You can refer to the blog article in the related links for **a practical how-to guide**.
 
+It is published for Scala 2.13+ and 3.3+ and fully supports Scala.js 1.13.1+ and Scala Native 0.4.14+.
+
+### QuickStart
 @:select(build-tool)
 @:choice(scala-cli)
 ```scala
@@ -17,7 +20,7 @@ libraryDependencies ++= Seq(
 ```
 @:@
 
-### Using `cross`
+and then use it like
 
 ```scala mdoc
 import dev.toniogela.cross.Platform
@@ -25,8 +28,3 @@ import dev.toniogela.cross.Platform
 // Using Scala 3+ on JVM
 Platform.platformAndVersion
 ```
-
-## Logical steps
-
-
-
