@@ -40,7 +40,7 @@ lazy val tests = crossProject(JVMPlatform, JSPlatform, NativePlatform)
   .dependsOn(core)
   .settings(
     name                                    := "cross-tests",
-    libraryDependencies += "org.scalatest" %%% "scalatest" % "3.2.17" % Test
+    libraryDependencies += "org.scalatest" %%% "scalatest" % "3.2.18" % Test
   )
 
 lazy val unidocs = project
