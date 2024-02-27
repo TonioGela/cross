@@ -13,7 +13,7 @@ ThisBuild / tlSonatypeUseLegacyHost := false
 ThisBuild / tlBaseVersion           := "0.0"
 ThisBuild / tlVersionIntroduced     := Map("3" -> "0.0.1")
 
-ThisBuild / crossScalaVersions := List("2.13.12", "3.4.0")
+ThisBuild / crossScalaVersions := List("2.13.13", "3.4.0")
 ThisBuild / scalaVersion       := "3.4.0"
 
 ThisBuild / githubWorkflowJavaVersions := List(JavaSpec.temurin("8"), JavaSpec.temurin("17"))
