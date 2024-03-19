@@ -1,6 +1,6 @@
 import laika.ast.LengthUnit.px
 import laika.helium.config._
-import laika.rewrite.nav._
+import laika.config.{ChoiceConfig, SelectionConfig, Selections}
 
 ThisBuild / organization     := "dev.toniogela"
 ThisBuild / organizationName := "TonioGela"
