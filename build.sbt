@@ -21,7 +21,7 @@ ThisBuild / githubWorkflowJavaVersions := List(JavaSpec.temurin("8"), JavaSpec.t
 ThisBuild / tlSitePublishBranch := Some("main")
 
 ThisBuild / mergifyStewardConfig ~= {
-  _.map(_.copy(mergeMinors = true, author = "toniogela-s-scala-steward[bot]"))
+  _.map(_.withMergeMinors(true).withAuthor("toniogela-s-scala-steward[bot]"))
 }
 
 Global / onChangedBuildSource := ReloadOnSourceChanges
