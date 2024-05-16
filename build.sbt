@@ -13,8 +13,8 @@ ThisBuild / tlSonatypeUseLegacyHost := false
 ThisBuild / tlBaseVersion           := "0.0"
 ThisBuild / tlVersionIntroduced     := Map("3" -> "0.0.1")
 
-ThisBuild / crossScalaVersions := List("2.13.14", "3.4.1")
-ThisBuild / scalaVersion       := "3.4.1"
+ThisBuild / crossScalaVersions := List("2.13.14", "3.4.2")
+ThisBuild / scalaVersion       := "3.4.2"
 
 ThisBuild / githubWorkflowJavaVersions := List(JavaSpec.temurin("8"), JavaSpec.temurin("17"))
 
@@ -56,7 +56,7 @@ lazy val docs = project
   .enablePlugins(TypelevelSitePlugin)
   .dependsOn(core.jvm)
   .settings(
-    scalaVersion := "3.4.1",
+    scalaVersion := "3.4.2",
     tlSiteHelium ~= { helium =>
       val favicon            = Favicon.external("https://toniogela.dev/favicon.ico", "32x32", "image/vnd.microsoft.icon")
       val homeLink           = TextLink.external("https://cross.toniogela.dev", "❌ Cross Library")
