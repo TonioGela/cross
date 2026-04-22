@@ -9,7 +9,6 @@ ThisBuild / licenses         := Seq(License.MIT)
 ThisBuild / homepage         := Some(url(s"https://cross.toniogela.dev/"))
 ThisBuild / developers       := List(tlGitHubDev("TonioGela", "Antonio Gelameris"))
 
-ThisBuild / tlSonatypeUseLegacyHost := false
 ThisBuild / tlBaseVersion           := "0.0"
 ThisBuild / tlVersionIntroduced     := Map("3" -> "0.0.1")
 
