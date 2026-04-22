@@ -17,6 +17,8 @@ ThisBuild / scalaVersion       := "3.4.3"
 
 ThisBuild / githubWorkflowJavaVersions := List(JavaSpec.temurin("8"), JavaSpec.temurin("17"))
 
+ThisBuild / tlCiReleaseBranches := Seq("main")
+
 ThisBuild / tlSitePublishBranch := Some("main")
 
 ThisBuild / mergifyStewardConfig ~= {
