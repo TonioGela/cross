@@ -58,6 +58,20 @@ lazy val docs = project
   .dependsOn(core.jvm)
   .settings(
     scalaVersion := "3.4.3",
+    // the site is deployed to Cloudflare Workers, not gh-pages: see .github/wrangler.jsonc
+    tlSitePublish := Seq(
+      WorkflowStep.Use(
+        UseRef.Public("cloudflare", "wrangler-action", "v4"),
+        name = Some("Deploy to Cloudflare"),
+        params = Map(
+          "apiToken"        -> "${{ secrets.CLOUDFLARE_API_TOKEN }}",
+          "accountId"       -> "${{ secrets.CLOUDFLARE_ACCOUNT_ID }}",
+          "wranglerVersion" -> "4.131.0",
+          "command"         -> "deploy --config .github/wrangler.jsonc"
+        ),
+        cond = Some("github.event_name != 'pull_request' && github.ref == 'refs/heads/main'")
+      )
+    ),
     tlSiteHelium ~= { helium =>
       val favicon            = Favicon.external("https://toniogela.dev/favicon.ico", "32x32", "image/vnd.microsoft.icon")
       val homeLink           = TextLink.external("https://cross.toniogela.dev", "❌ Cross Library")
