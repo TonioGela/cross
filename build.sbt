@@ -57,7 +57,7 @@ lazy val docs = project
   .enablePlugins(TypelevelSitePlugin)
   .dependsOn(core.jvm)
   .settings(
-    scalaVersion := "3.4.3",
+    scalaVersion  := "3.4.3",
     // the site is deployed to Cloudflare Workers, not gh-pages: see .github/wrangler.jsonc
     tlSitePublish := Seq(
       WorkflowStep.Use(
