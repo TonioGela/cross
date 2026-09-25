@@ -57,8 +57,7 @@ lazy val docs = project
   .enablePlugins(TypelevelSitePlugin)
   .dependsOn(core.jvm)
   .settings(
-    scalaVersion  := "3.4.3",
-    // the site is deployed to Cloudflare Workers, not gh-pages: see .github/wrangler.jsonc
+    scalaVersion  := "3.9.0",
     tlSitePublish := Seq(
       WorkflowStep.Use(
         UseRef.Public("cloudflare", "wrangler-action", "v4"),
@@ -78,7 +77,6 @@ lazy val docs = project
       val blogLink           = TextLink.external("https://toniogela.dev/cross-library", "A blog article about this lib")
       val sbtTL              = TextLink.external("https://typelevel.org/sbt-typelevel", "sbt-typelevel")
       val chatLink: IconLink = IconLink.external("https://discord.com/users/372358874243661825", HeliumIcon.chat)
-      val twitter: IconLink  = IconLink.external("https://twitter.com/toniogela", HeliumIcon.twitter)
 
       helium.site.darkMode.disabled.site
         .favIcons(favicon)
@@ -87,7 +85,7 @@ lazy val docs = project
         .site
         .topNavigationBar(
           homeLink = homeLink,
-          navLinks = twitter :: chatLink :: Nil
+          navLinks = chatLink :: Nil
         )
         .site
         .mainNavigation(appendLinks = ThemeNavigationSection("Related Links", blogLink, sbtTL) :: Nil)
