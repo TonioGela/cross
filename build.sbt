@@ -15,7 +15,7 @@ ThisBuild / tlVersionIntroduced := Map("3" -> "0.0.1")
 ThisBuild / crossScalaVersions := List("2.13.18", "3.9.0")
 ThisBuild / scalaVersion       := "3.9.0"
 
-ThisBuild / githubWorkflowJavaVersions := List(JavaSpec.temurin("8"), JavaSpec.temurin("17"))
+ThisBuild / githubWorkflowJavaVersions := List(JavaSpec.temurin("17"))
 
 ThisBuild / tlCiReleaseBranches := Seq("main")
 
@@ -57,14 +57,26 @@ lazy val docs = project
   .enablePlugins(TypelevelSitePlugin)
   .dependsOn(core.jvm)
   .settings(
-    scalaVersion := "3.9.0",
+    scalaVersion  := "3.9.0",
+    tlSitePublish := Seq(
+      WorkflowStep.Use(
+        UseRef.Public("cloudflare", "wrangler-action", "v4"),
+        name = Some("Deploy to Cloudflare"),
+        params = Map(
+          "apiToken"        -> "${{ secrets.CLOUDFLARE_API_TOKEN }}",
+          "accountId"       -> "${{ secrets.CLOUDFLARE_ACCOUNT_ID }}",
+          "wranglerVersion" -> "4.131.0",
+          "command"         -> "deploy --config .github/wrangler.jsonc"
+        ),
+        cond = Some("github.event_name != 'pull_request' && github.ref == 'refs/heads/main'")
+      )
+    ),
     tlSiteHelium ~= { helium =>
       val favicon            = Favicon.external("https://toniogela.dev/favicon.ico", "32x32", "image/vnd.microsoft.icon")
       val homeLink           = TextLink.external("https://cross.toniogela.dev", "❌ Cross Library")
       val blogLink           = TextLink.external("https://toniogela.dev/cross-library", "A blog article about this lib")
       val sbtTL              = TextLink.external("https://typelevel.org/sbt-typelevel", "sbt-typelevel")
       val chatLink: IconLink = IconLink.external("https://discord.com/users/372358874243661825", HeliumIcon.chat)
-      val twitter: IconLink  = IconLink.external("https://twitter.com/toniogela", HeliumIcon.twitter)
 
       helium.site.darkMode.disabled.site
         .favIcons(favicon)
@@ -73,7 +85,7 @@ lazy val docs = project
         .site
         .topNavigationBar(
           homeLink = homeLink,
-          navLinks = twitter :: chatLink :: Nil
+          navLinks = chatLink :: Nil
         )
         .site
         .mainNavigation(appendLinks = ThemeNavigationSection("Related Links", blogLink, sbtTL) :: Nil)
