@@ -12,7 +12,7 @@ ThisBuild / developers       := List(tlGitHubDev("TonioGela", "Antonio Gelameris
 ThisBuild / tlBaseVersion       := "0.0"
 ThisBuild / tlVersionIntroduced := Map("3" -> "0.0.1")
 
-ThisBuild / crossScalaVersions := List("2.13.18", "3.9.0")
+ThisBuild / crossScalaVersions := List("3.10.0", "3.9.0")
 ThisBuild / scalaVersion       := "3.9.0"
 
 ThisBuild / githubWorkflowJavaVersions := List(JavaSpec.temurin("17"))
